@@ -10,7 +10,7 @@ import matplotlib.cm as cm
 NUM_NEIGHBORS = 9
 ALPHA = 1
 BETA = 1
-C = 30
+C = 15
 D = 0.1
 M = 5
 G = 10
@@ -53,11 +53,15 @@ class Contour:
     def norma(self, x1, x2, y1, y2):
         x = x2 - x1
         y = y2 - y1
+        if x == 0 and y == 0:
+            return 1
         return np.sqrt(x * x + y * y)
 
     def norma_p(self, p1, p2):
         x = p2[0] - p1[0]
         y = p2[1] - p1[1]
+        if x == 0 and y == 0:
+            return 1
         return np.sqrt(x * x + y * y)
 
     def lV(self):
@@ -263,7 +267,7 @@ def contour_transform(cnt):
     x = np.array([])
     y = np.array([])
     for i in range(len(cnt)):
-        if i % 10 == 0:
+        if i % 7 == 0:
             x = np.append(x, cnt[i][0][1])
             y = np.append(y, cnt[i][0][0])
     array = np.array([x, y]).T
